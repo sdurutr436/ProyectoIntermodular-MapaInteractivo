@@ -1,55 +1,36 @@
-# Docker Compose - Sprint 2 (Backend + Base de Datos)
-# Configuración completa con MongoDB
-
-version: '3.8'
-
 services:
-  # Frontend - React + Vite
   client:
     build:
       context: ./client
       dockerfile: Dockerfile
     ports:
-      - "5173:5173"
-    volumes:
-      - ./client:/app
-      - /app/node_modules
-    environment:
-      - NODE_ENV=development
-    command: npm run dev -- --host
+      - "3000:80"
     depends_on:
       - server
 
-  # Backend - Node.js + Express
   server:
     build:
       context: ./server
       dockerfile: Dockerfile
     ports:
       - "5000:5000"
+    environment:
+      MONGO_URI: mongodb://mongo:27017/translator_db
+      PORT: 5000
+      NODE_ENV: production
+      DEEPL_API_KEY: ${DEEPL_API_KEY}
+    depends_on:
+      - mongo
     volumes:
       - ./server:/app
       - /app/node_modules
-    environment:
-      - NODE_ENV=development
-      - PORT=5000
-      - MONGO_URI=mongodb://mongo:27017/translator_db
-      - DEEPL_API_KEY=${DEEPL_API_KEY:-your_api_key_here}
-    command: npm run dev
-    depends_on:
-      - mongo
 
-  # MongoDB - Base de Datos
   mongo:
     image: mongo:7.0
-    container_name: translator_mongo
     ports:
       - "27017:27017"
     volumes:
       - mongo-data:/data/db
-    environment:
-      - MONGO_INITDB_DATABASE=translator_db
 
 volumes:
   mongo-data:
-    driver: local
