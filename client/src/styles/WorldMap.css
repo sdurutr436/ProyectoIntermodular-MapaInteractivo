@@ -82,7 +82,7 @@
 
 /* Estilos por defecto de los países */
 .world-map-svg path {
-  fill: #ffc800; /*Color de los países*/
+  fill: #f8e292; /*Color de los países*/
   stroke: #d4a574;
   stroke-width: 0.5;
   transition: all 0.3s ease;
