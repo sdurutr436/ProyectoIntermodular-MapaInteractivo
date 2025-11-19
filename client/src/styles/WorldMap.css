@@ -15,18 +15,19 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(255, 255, 255, 0.9);
   border-radius: 8px;
   padding: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 2px solid #d4dce6;
 }
 
 .zoom-button {
   width: 40px;
   height: 40px;
   border: none;
-  border-radius: 4px;
-  background-color: #0891B2;
+  border-radius: 6px;
+  background-color: #2c5aa0;
   color: white;
   font-size: 20px;
   font-weight: bold;
@@ -38,12 +39,12 @@
 }
 
 .zoom-button:disabled {
-  background-color: #4A5568;
+  background-color: #9cb4cc;
   cursor: not-allowed;
 }
 
 .zoom-button:not(:disabled):hover {
-  background-color: #0E7490;
+  background-color: #234a87;
   transform: scale(1.05);
 }
 
@@ -53,7 +54,7 @@
 
 .zoom-separator {
   height: 1px;
-  background-color: #4A5568;
+  background-color: #d4dce6;
   margin: 4px 0;
 }
 
@@ -63,17 +64,49 @@
   bottom: 20px;
   right: 20px;
   z-index: 1000;
-  background-color: rgba(0, 0, 0, 0.7);
-  color: white;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #2c3e50;
   padding: 8px 12px;
   border-radius: 8px;
   font-size: 12px;
   font-weight: bold;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 2px solid #d4dce6;
 }
 
 /* Estilos del Mapa */
 .world-map-svg {
   width: 100%;
   height: 100%;
+}
+
+/* Estilos por defecto de los países */
+.world-map-svg path {
+  fill: #ffc800; /*Color de los países*/
+  stroke: #d4a574;
+  stroke-width: 0.5;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.world-map-svg path:hover {
+  fill: #fff8dc;
+  stroke: #c89860;
+  stroke-width: 1;
+}
+
+/* -------- País bloqueado "rallado" --------- */
+.country-blocked {
+  fill: url(#horizontal-stripe) !important;
+  stroke: #e74c3c !important;
+  stroke-width: 1.5 !important;
+  opacity: 0.85 !important;
+  cursor: not-allowed !important;
+  transition: all 0.3s ease;
+}
+
+.country-blocked:hover {
+  stroke: #c0392b !important;
+  stroke-width: 2 !important;
+  opacity: 1 !important;
 }
