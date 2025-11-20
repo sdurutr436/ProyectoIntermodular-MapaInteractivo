@@ -10,15 +10,17 @@
 
 /* Header fijo con 3 columnas */
 .app-header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 1000;
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
   border-bottom: 2px solid #d4dce6;
   padding: 1rem 2rem;
   display: grid;
-  grid-template-columns: 200px 1fr 80px;
+  grid-template-columns: 1fr 2fr 1fr;
   gap: 2rem;
   align-items: center;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
@@ -27,6 +29,7 @@
 .header-left {
   display: flex;
   align-items: center;
+  gap: 1rem;
 }
 
 .app-title {
@@ -37,9 +40,20 @@
   letter-spacing: -0.5px;
 }
 
+.mode-indicator {
+  font-size: 0.85rem;
+  color: #64748b;
+  font-weight: 500;
+  background-color: rgba(102, 126, 234, 0.08);
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  border: 1px solid rgba(102, 126, 234, 0.2);
+}
+
 .header-center {
   display: flex;
   justify-content: center;
+  width: 100%;
 }
 
 .header-right {
@@ -48,34 +62,51 @@
   align-items: center;
 }
 
-/* Menú hamburguesa */
-.hamburger-menu {
+/* Botón Toggle para Modo Oscuro */
+.dark-mode-toggle {
   background: none;
   border: none;
   cursor: pointer;
   padding: 0.5rem;
   display: flex;
-  flex-direction: column;
-  gap: 5px;
-  width: 32px;
-  height: 32px;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   border-radius: 6px;
   transition: background-color 0.2s ease;
 }
 
-.hamburger-menu:hover {
+.dark-mode-toggle:hover {
   background-color: #e8ecf1;
 }
 
-.hamburger-menu span {
-  display: block;
-  width: 24px;
-  height: 3px;
-  background-color: #2c5aa0;
-  border-radius: 2px;
-  transition: all 0.3s ease;
+.toggle-switch {
+  width: 50px;
+  height: 28px;
+  background-color: #d4dce6;
+  border-radius: 14px;
+  position: relative;
+  transition: background-color 0.3s ease;
+  border: 2px solid #b8c5d6;
+}
+
+.toggle-switch.active {
+  background-color: #667eea;
+  border-color: #5569d8;
+}
+
+.toggle-circle {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.toggle-switch.active .toggle-circle {
+  transform: translateX(22px);
 }
 
 /* Main content */
@@ -86,6 +117,7 @@
   flex-direction: column;
   align-items: center;
   padding: 1.5rem;
+  margin-top: 90px;
 }
 
 .map-wrapper {
@@ -100,23 +132,13 @@
 }
 
 .app-footer {
-  width: 100%;
-  text-align: center;
-  padding: 1.5rem;
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(10px);
-}
-
-.footer-text {
-  color: #64748b;
-  font-size: 0.875rem;
-  margin: 0;
+  display: none;
 }
 
 /* Responsive */
 @media (max-width: 1024px) {
   .app-header {
-    grid-template-columns: 150px 1fr 60px;
+    grid-template-columns: auto 1fr auto;
     gap: 1rem;
     padding: 0.875rem 1rem;
   }

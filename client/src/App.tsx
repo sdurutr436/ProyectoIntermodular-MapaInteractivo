@@ -15,6 +15,7 @@ const App: React.FC = () => {
   const [translationResult, setTranslationResult] = useState<TranslationResult | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
 
   // Estado para países bloqueados (rallados)
   const [blockedCountries, setBlockedCountries] = useState<string[]>([]);
@@ -71,12 +72,22 @@ const App: React.FC = () => {
     setError(null);
   };
 
+  const handleDarkModeToggle = () => {
+    setIsDarkMode(!isDarkMode);
+    // La funcionalidad completa de tema oscuro se implementará en futuras iteraciones
+  };
+
   return (
     <div className="app-container">
       {/* Header fijo con 3 columnas */}
       <header className="app-header">
         <div className="header-left">
           <h1 className="app-title">Tradumap</h1>
+          {/* Modo actual de traducción */}
+          <span className="mode-indicator">
+            Modo Traducción
+            {/* Futuro: Modo Juego (Guess the Country) - se activará cuando se implemente el minijuego */}
+          </span>
         </div>
         
         <div className="header-center">
@@ -84,14 +95,20 @@ const App: React.FC = () => {
             value={inputText}
             onChange={(value) => setInputText(value)}
             placeholder="Escribe algo y luego haz clic en un país del mapa"
+            onHamburgerClick={() => console.log("Menú hamburguesa clickeado")}
           />
         </div>
         
         <div className="header-right">
-          <button className="hamburger-menu" aria-label="Menú">
-            <span></span>
-            <span></span>
-            <span></span>
+          <button 
+            className="dark-mode-toggle"
+            aria-label="Cambiar modo oscuro"
+            onClick={handleDarkModeToggle}
+            title="Cambiar a modo oscuro"
+          >
+            <div className={`toggle-switch ${isDarkMode ? 'active' : ''}`}>
+              <div className="toggle-circle"></div>
+            </div>
           </button>
         </div>
       </header>
@@ -102,12 +119,6 @@ const App: React.FC = () => {
           <WorldMap onCountryClick={handleCountryClick} blockedCountries={blockedCountries} />
         </div>
       </main>
-
-      <footer className="app-footer">
-        <p className="footer-text">
-          Desarrollado con MERN (MongoDB, Express, React, Node.js) y Docker.
-        </p>
-      </footer>
 
       {selectedCountry && (
         <TranslationModal

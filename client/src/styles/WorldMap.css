@@ -78,6 +78,7 @@
 .world-map-svg {
   width: 100%;
   height: 100%;
+  outline: none;
 }
 
 /* Estilos por defecto de los países */
@@ -87,6 +88,16 @@
   stroke-width: 0.5;
   transition: all 0.3s ease;
   cursor: pointer;
+  outline: none;
+}
+
+.world-map-svg path:focus {
+  outline: none;
+}
+
+.world-map-svg path:active,
+.world-map-svg path:focus-visible {
+  outline: none;
 }
 
 .world-map-svg path:hover {

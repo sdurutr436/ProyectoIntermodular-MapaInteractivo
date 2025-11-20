@@ -5,20 +5,14 @@ interface SearchBarProps {
     value: string;
     onChange: (value: string) => void;
     placeholder?: string;
+    onHamburgerClick?: () => void;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ value, onChange, placeholder }) => {
+const SearchBar: React.FC<SearchBarProps> = ({ value, onChange, placeholder, onHamburgerClick }) => {
     return (
         <div className="search-bar-container">
-            <input
-                type="text"
-                value={value}
-                onChange={(e) => onChange(e.target.value)}
-                placeholder={placeholder}
-                className="search-bar-input"
-            />
             <svg
-                className="search-bar-icon"
+                className="search-bar-icon search-bar-icon-left"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -31,6 +25,22 @@ const SearchBar: React.FC<SearchBarProps> = ({ value, onChange, placeholder }) =
                     d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                 ></path>
             </svg>
+            <input
+                type="text"
+                value={value}
+                onChange={(e) => onChange(e.target.value)}
+                placeholder={placeholder}
+                className="search-bar-input"
+            />
+            <button 
+                className="search-bar-hamburger" 
+                aria-label="Menú"
+                onClick={onHamburgerClick}
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     );
 };
